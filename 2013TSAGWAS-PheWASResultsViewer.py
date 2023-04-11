@@ -175,15 +175,15 @@ sns.set(style = "whitegrid")
 #### Data Import & Processing ####
 
 # Import PheWAS Results for each dataset
-AUS_data          = pd.read_excel("PheWAS Results.xlsx", sheet_name = "AUS")
-UK_data           = pd.read_excel("PheWAS Results.xlsx", sheet_name = "UK")
-SE_data           = pd.read_excel("PheWAS Results.xlsx", sheet_name = "SE")
+AUS_data          = pd.read_excel("PheWAS Results Final.xlsx", sheet_name = "AUS")
+UK_data           = pd.read_excel("PheWAS Results Final.xlsx", sheet_name = "UK")
+SE_data           = pd.read_excel("PheWAS Results Final.xlsx", sheet_name = "SE")
 
 # Import IUT Results for each Fisher's combined dataset
-AUSUK_data        = pd.read_excel("PheWAS Results.xlsx", sheet_name = "AUS-UK")
-AUSSE_data        = pd.read_excel("PheWAS Results.xlsx", sheet_name = "AUS-SE")
-UKSE_data         = pd.read_excel("PheWAS Results.xlsx", sheet_name = "UK-SE")
-AUSUKSE_data      = pd.read_excel("PheWAS Results.xlsx", sheet_name = "AUS-UK-SE")
+AUSUK_data        = pd.read_excel("PheWAS Results Final.xlsx", sheet_name = "AUS-UK")
+AUSSE_data        = pd.read_excel("PheWAS Results Final.xlsx", sheet_name = "AUS-SE")
+UKSE_data         = pd.read_excel("PheWAS Results Final.xlsx", sheet_name = "UK-SE")
+AUSUKSE_data      = pd.read_excel("PheWAS Results Final.xlsx", sheet_name = "AUS-UK-SE")
 
 # Import Bonferroni Corrected Thresholds for each Fisher's combined dataset
 AUSUK_BCT         = list(AUSUK_data["Bonferroni Corrected Threshold"].dropna())
@@ -192,7 +192,7 @@ UKSE_BCT          = list(UKSE_data["Bonferroni Corrected Threshold"].dropna())
 AUSUKSE_BCT       = list(AUSUKSE_data["Bonferroni Corrected Threshold"].dropna())
 
 # Import CBARQ Factors 
-CBARQ_factors     = pd.read_excel("PheWAS Results.xlsx", sheet_name = "CBARQ Qs")
+CBARQ_factors     = pd.read_excel("PheWAS Results Final.xlsx", sheet_name = "CBARQ Qs")
 CBARQ_factors     = CBARQ_factors.iloc[:,[0,2]]
 CBARQ_factors.index = list(np.arange(1,101,1))
 
@@ -232,18 +232,22 @@ UK_alleles        = pd.read_table("UKAlleles.txt")
 UK_genotypes      = pd.read_table("UKGenotypes.txt")
 
 # Import CBARQ Scores
-AUS_CBARQ         = pd.read_table("AUS_PostCBARQ.csv", sep = ",")
+AUS_CBARQ         = pd.read_table("AUS_PostCBARQ.txt", sep = ",")
 UK_CBARQ          = pd.read_table("UK_PostCBARQ.txt", sep = ",")
 SE_CBARQ          = pd.read_table("SE_PostCBARQ.txt", sep = ",")
 
 # Generate SNP and CBARQ Question Lists
-SNP_list          = list(AUS_genotypes.columns)
+SNP_list          = ("chr1.22989459", "chr1.24927539", "chr1.25289424", "chr3.47103534", "chr3.47134935",
+                     "chr3.47212502", "chr4.31420247", "chr6.76632282", "chr7.66358701", "chr9.16559175",
+                     "chr13.55534649", "chr13.58498102", "chr13.59658137", "chr13.59763520", "chr13.59902870",
+                     "chr15.40757218", "chr19.21040815", "chr36.25252101", "chr36.25648690")
 CBARQ_list        = list(AUS_CBARQ.columns)[1:101]
 
 #### Steamlit App ####
 ## Compile the sidebar for SNP and CBARQ selection
 st.set_option('deprecation.showPyplotGlobalUse', False)
 st.set_page_config(layout="wide")
+base = "dark"
 st.subheader("PheWAS & IUT Results Viewer of 2013TSA GWAS Hits")
 st.caption("Alexander Eyre (2023)")
 st.sidebar.markdown("Select SNP and CBARQ Question")
