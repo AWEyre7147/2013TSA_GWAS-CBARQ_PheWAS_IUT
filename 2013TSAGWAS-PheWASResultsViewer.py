@@ -13,6 +13,7 @@ def manhattan(df, pvalues, traits, colors, curr_chr, bct05, bct10, dataset):
     
     x_plot        = np.linspace(0, 100, 1000)
     y_plot05      = [i*-np.log10(bct05) for i in np.ones(1000)]
+    #y_plot10      = [i*-np.log10(bct10) for i in np.ones(1000)]
 
     ax            = sns.scatterplot(x = x_vals, 
                                     y = y_vals, 
@@ -22,12 +23,12 @@ def manhattan(df, pvalues, traits, colors, curr_chr, bct05, bct10, dataset):
                                     linewidth = 0.5)
     
     ax.plot(x_plot, y_plot05, color = 'r', linestyle = 'dashed')
-    ax.plot(x_plot, y_plot10, color = 'b', linestyle = 'dashed')
+    #ax.plot(x_plot, y_plot10, color = 'b', linestyle = 'dashed')
     
     ax.set_title("%s" % dataset, fontsize = 14)
     
     ax.set_ylabel("-log10(p)", fontsize = 12)
-    ax.set_yticks([0,1,2,3,4,5,6,7])
+    ax.set_yticks([0,1,2,3,4,5])
     
     ax.set_xticks(x_vals)
     ax.tick_params(bottom=True)
