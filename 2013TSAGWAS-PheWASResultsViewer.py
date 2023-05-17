@@ -43,6 +43,7 @@ def manhattan(df, pvalues, traits, colors, curr_chr, bct05, bct10, dataset):
         ha.set_linewidth(0.5)
     
     ax.legend(handles, labels, loc = (1.0,-0.2), labelspacing = 1.0, frameon = False, edgecolor = "black").remove()
+    ax.figure(dpi = 1200)
     
 def volcano(df, traits, pvalues, betavalues, colors, curr_chr, bct05, dataset):
     
