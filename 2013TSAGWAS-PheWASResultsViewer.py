@@ -13,7 +13,6 @@ def manhattan(df, pvalues, traits, colors, curr_chr, bct05, bct10, dataset):
     
     x_plot        = np.linspace(0, 100, 1000)
     y_plot05      = [i*-np.log10(bct05) for i in np.ones(1000)]
-    y_plot10      = [i*-np.log10(bct10) for i in np.ones(1000)]
 
     ax            = sns.scatterplot(x = x_vals, 
                                     y = y_vals, 
@@ -28,7 +27,7 @@ def manhattan(df, pvalues, traits, colors, curr_chr, bct05, bct10, dataset):
     ax.set_title("%s" % dataset, fontsize = 14)
     
     ax.set_ylabel("-log10(p)", fontsize = 12)
-    ax.set_yticks([0,1,2,3,4,5,6])
+    ax.set_yticks([0,1,2,3,4,5,6,7])
     
     ax.set_xticks(x_vals)
     ax.tick_params(bottom=True)
@@ -60,7 +59,7 @@ def volcano(df, traits, pvalues, betavalues, colors, curr_chr, bct05, dataset):
     
     x_plot        = np.linspace(min(df[betavalues]) - stepsize, max(df[betavalues]) + stepsize, 1000)
     y_plot05      = [i*-np.log10(bct05) for i in np.ones(1000)]
-    y_plot0       = np.arange(-0.2, 6.2, (6.2+0.2)/999.5)
+    y_plot0       = np.arange(-0.2, 7.2, (7.2+0.2)/999.5)
     
     i = 0
     while i < len(list(df[betavalues])):
@@ -79,7 +78,7 @@ def volcano(df, traits, pvalues, betavalues, colors, curr_chr, bct05, dataset):
     ax.set_title("%s" % dataset, fontsize = 14)
     
     ax.set_ylabel("-log10(p)", fontsize = 12)
-    ax.set_yticks([0,1,2,3,4,5])
+    ax.set_yticks([0,1,2,3,4,5,6,7])
     ax.set_ylim(-0.1, np.ceil(max(df[pvalues])) + 0.1)
     
     ax.set_xlabel("Beta", fontsize = 12)
