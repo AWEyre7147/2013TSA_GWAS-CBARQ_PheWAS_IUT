@@ -28,7 +28,7 @@ def manhattan(df, pvalues, traits, colors, curr_chr, bct05, bct10, dataset):
     ax.set_title("%s" % dataset, fontsize = 14)
     
     ax.set_ylabel("-log10(p)", fontsize = 12)
-    ax.set_yticks([0,1,2,3,4,5])
+    ax.set_yticks([0,1,2,3,4,5,6])
     
     ax.set_xticks(x_vals)
     ax.tick_params(bottom=True)
