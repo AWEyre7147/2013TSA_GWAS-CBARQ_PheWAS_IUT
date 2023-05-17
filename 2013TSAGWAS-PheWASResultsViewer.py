@@ -6,7 +6,7 @@
 
 def manhattan(df, pvalues, traits, colors, curr_chr, bct05, bct10, dataset):
 
-    fig           = matplotlib.pyplot.figure(figsize=(18, 4))
+    fig           = matplotlib.pyplot.figure(figsize=(18, 4), dpi = 300)
     
     x_vals        = list(np.arange(1,len(df)+1))
     y_vals        = -np.log10(list(df[pvalues]))
@@ -43,7 +43,6 @@ def manhattan(df, pvalues, traits, colors, curr_chr, bct05, bct10, dataset):
         ha.set_linewidth(0.5)
     
     ax.legend(handles, labels, loc = (1.0,-0.2), labelspacing = 1.0, frameon = False, edgecolor = "black").remove()
-    ax.figure(dpi = 1200)
     
 def volcano(df, traits, pvalues, betavalues, colors, curr_chr, bct05, dataset):
     
