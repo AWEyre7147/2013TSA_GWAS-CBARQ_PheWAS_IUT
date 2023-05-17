@@ -6,7 +6,7 @@
 
 def manhattan(df, pvalues, traits, colors, curr_chr, bct05, bct10, dataset):
 
-    fig           = matplotlib.pyplot.figure(figsize=(18, 4), dpi = 300)
+    fig           = matplotlib.pyplot.figure(figsize=(18, 4), dpi = 1200)
     
     x_vals        = list(np.arange(1,len(df)+1))
     y_vals        = -np.log10(list(df[pvalues]))
