@@ -186,6 +186,9 @@ UKSE_data         = pd.read_excel("PheWAS Results.xlsx", sheet_name = "UK-SE")
 AUSUKSE_data      = pd.read_excel("PheWAS Results.xlsx", sheet_name = "AUS-UK-SE")
 
 # Import Bonferroni Corrected Thresholds for each Fisher's combined dataset
+AUS_BCT           = list(AUS_data["Bonferroni Corrected Threshold"].dropna())
+UK_BCT            = list(UK_data["Bonferroni Corrected Threshold"].dropna())
+SE_BCT            = list(SE_data["Bonferroni Corrected Threshold"].dropna())
 AUSUK_BCT         = list(AUSUK_data["Bonferroni Corrected Threshold"].dropna())
 AUSSE_BCT         = list(AUSSE_data["Bonferroni Corrected Threshold"].dropna())
 UKSE_BCT          = list(UKSE_data["Bonferroni Corrected Threshold"].dropna())
@@ -276,7 +279,7 @@ if SNP_selector in AUS_data.columns:
         AUS_df         = AUS_df.join(CTC_factors["TSA_Pretraining_Factor"])
         AUS_df         = AUS_df.sort_values(by = 'TSA_Pretraining_Factor', key = lambda nm: nm.map(CTC_order))
         AUS_df         = AUS_df.dropna()
-        volc.pyplot(fig = volcano(AUS_df, "Phenotype", "-Log(P)", "Beta", "TSA_Pretraining_Factor", SNP_selector, 0.05, "Australian"),
+        volc.pyplot(fig = volcano(AUS_df, "Phenotype", "-Log(P)", "Beta", "TSA_Pretraining_Factor", SNP_selector, AUS_BCT[0], "Australian"),
                   clear_figure = True)
               
 if SNP_selector in AUS_data.columns:
@@ -292,7 +295,7 @@ if SNP_selector in UK_data.columns:
         UK_df          = UK_df.join(CTC_factors["TSA_Pretraining_Factor"])
         UK_df          = UK_df.sort_values(by = 'TSA_Pretraining_Factor', key = lambda nm: nm.map(CTC_order))
         UK_df          = UK_df.dropna()
-        volc.pyplot(fig = volcano(UK_df, "Phenotype", "-Log(P)", "Beta", "TSA_Pretraining_Factor", SNP_selector, 0.05, "United Kingdom"),
+        volc.pyplot(fig = volcano(UK_df, "Phenotype", "-Log(P)", "Beta", "TSA_Pretraining_Factor", SNP_selector, UK_BCT[0], "United Kingdom"),
                   clear_figure = True)
               
 if SNP_selector in UK_data.columns:
@@ -309,7 +312,7 @@ if SNP_selector in SE_data.columns:
         SE_df          = SE_df.join(CTC_factors["TSA_Pretraining_Factor"])
         SE_df          = SE_df.sort_values(by = 'TSA_Pretraining_Factor', key = lambda nm: nm.map(CTC_order))
         SE_df          = SE_df.dropna()
-        volc.pyplot(fig = volcano(SE_df, "Phenotype", "-Log(P)", "Beta", "TSA_Pretraining_Factor", SNP_selector, 0.05, "Seeing Eye"),
+        volc.pyplot(fig = volcano(SE_df, "Phenotype", "-Log(P)", "Beta", "TSA_Pretraining_Factor", SNP_selector, SE_BCT[0], "Seeing Eye"),
                   clear_figure = True)
                   
 if SNP_selector in SE_data.columns:
