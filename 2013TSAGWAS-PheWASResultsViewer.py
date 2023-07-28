@@ -162,6 +162,76 @@ def compareplots(genotype_data, CBARQ_data, chr_name, CBARQ_Q, source):
     matplotlib.pyplot.xlabel("Score", fontsize = 12)
     matplotlib.pyplot.ylabel("Relative Frequency", fontsize = 12)
 
+def compareplotsAUS(genotype_data, CBARQ_data, chr_name, CBARQ_Q, source):    
+    
+    fig            = matplotlib.pyplot.figure(figsize=(8, 6))
+    
+    # Identify all of the unique genotypes
+    genotype_list  = []
+    for x in genotype_data[chr_name]:
+        if x not in genotype_list:
+            genotype_list.append(x)
+    
+    genotype_list.sort()
+    genotype_count = len(genotype_list)    
+    
+    # Generate Datasets
+    i              = 0
+    dataset        = {}
+    curr_vals      = []
+    while i < genotype_count:
+        curr_vals = list(CBARQ_data[CBARQ_Q][genotype_data[chr_name] == genotype_list[i]])
+        if "nan" in curr_vals:
+            curr_vals.remove("nan")
+        curr_vals = [x for x in curr_vals if np.isnan(x) == False]
+        curr_vals = [x + i / genotype_count for x in curr_vals]   
+        dataset[genotype_list[i]] = curr_vals
+        i = i + 1  
+    
+    # Remove empty datasets
+    for genotype in genotype_list:
+        if dataset[genotype] == []:
+            del dataset[genotype]
+            genotype_list.remove(genotype)
+            genotype_count = genotype_count - 1
+    
+    # Generate Plot
+    i              = 0
+    while i < genotype_count:
+        hplot = sns.histplot(data    = dataset[genotype_list[i]],
+                             bins    = np.arange(0, 5.5, 1 / genotype_count),
+                             alpha   = 0.8,
+                             stat    = "probability") 
+        i = i + 1
+    
+    # Generate Legend
+    legend_artist  = [Rectangle((0, 0), 1, 1, fc = '#1f77b4', alpha = 0.8),
+                      Rectangle((0, 0), 1, 1, fc = '#ff7f0e', alpha = 0.8),
+                      Rectangle((0, 0), 1, 1, fc = '#2ca02c', alpha = 0.8),
+                      Rectangle((0, 0), 1, 1, fc = '#d62728', alpha = 0.8)] 
+                      
+    if genotype_count == 2:
+        matplotlib.pyplot.legend(handles = [legend_artist[0], legend_artist[1]],
+                                 labels  = ["%s (%s)" % (genotype_list[0], len(dataset[genotype_list[0]])), 
+                                            "%s (%s)" % (genotype_list[1], len(dataset[genotype_list[1]]))])
+    elif genotype_count == 3:
+        matplotlib.pyplot.legend(handles = [legend_artist[0], legend_artist[1], legend_artist[2]],
+                                 labels  = ["%s (%s)" % (genotype_list[0], len(dataset[genotype_list[0]])), 
+                                            "%s (%s)" % (genotype_list[1], len(dataset[genotype_list[1]])),
+                                            "%s (%s)" % (genotype_list[2], len(dataset[genotype_list[2]]))])
+    else:
+        matplotlib.pyplot.legend(handles = [legend_artist[0], legend_artist[1], legend_artist[2], legend_artist[3]],
+                                 labels  = ["%s (%s)" % (genotype_list[0], len(dataset[genotype_list[0]])), 
+                                            "%s (%s)" % (genotype_list[1], len(dataset[genotype_list[1]])),
+                                            "%s (%s)" % (genotype_list[2], len(dataset[genotype_list[2]])),
+                                            "%s (%s)" % (genotype_list[3], len(dataset[genotype_list[3]]))])
+    # Additional Plot Settings
+    matplotlib.pyplot.title(source, size = 14)
+    matplotlib.pyplot.xticks(ticks  = [0.5, 1.5, 2.5, 3.5, 4.5],
+               labels = ["1", "2", "3", "4", "5"])
+    matplotlib.pyplot.xlabel("Score", fontsize = 12)
+    matplotlib.pyplot.ylabel("Relative Frequency", fontsize = 12)
+
 #### Import Packages ####
 
 import pandas as pd
@@ -284,7 +354,7 @@ if SNP_selector in AUS_data.columns:
               
 if SNP_selector in AUS_data.columns:
     if CBARQ_selector in AUS_CBARQ.columns:
-        histo.pyplot(fig = compareplots(AUS_genotypes, AUS_CBARQ, SNP_selector, CBARQ_selector, "Australian"),
+        histo.pyplot(fig = compareplotsAUS(AUS_genotypes, AUS_CBARQ, SNP_selector, CBARQ_selector, "Australian"),
                   clear_figure = True)
                    
 if SNP_selector in UK_data.columns:
