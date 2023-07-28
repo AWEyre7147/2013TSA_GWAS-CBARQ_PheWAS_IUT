@@ -240,7 +240,7 @@ UK_CBARQ          = pd.read_table("UK_PostCBARQ.txt", sep = ",")
 SE_CBARQ          = pd.read_table("SE_PostCBARQ.txt", sep = ",")
 
 # Generate SNP and CBARQ Question Lists
-SNP_list          = ("chr1.22989459", "chr1.25289424", "chr3.47103534", "chr3.47134935", "chr3.47212502",
+SNP_list          = ("chr1.22989459", "chr.24927539", "chr1.25289424", "chr3.47103534", "chr3.47134935", "chr3.47212502",
                      "chr4.31420247", "chr6.76632282", "chr7.66358701", "chr9.16559175", "chr11.38609196",
                      "chr13.55534649", "chr13.58498102", "chr13.59658137", "chr13.59763520", "chr13.59902870", 
                      "chr15.40757218", "chr19.21040815", "chr36.25252101", "chr36.25648690")
