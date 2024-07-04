@@ -1,6 +1,6 @@
 # 2013TSAGWAS-PheWASResultsViewer.py
 # PheWAS and IUT Results Viewer of 2013TSA GWAS Hits
-# Alexander Eyre (2023)
+# Alexander Eyre (2024)
 
 #### Define Functions ####
 
@@ -322,7 +322,7 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 st.set_page_config(layout="wide")
 base = "dark"
 st.subheader("PheWAS & IUT Results Viewer of 2013TSA GWAS Hits")
-st.caption("Alexander Eyre (2023)")
+st.caption("Alexander Eyre (2024)")
 st.sidebar.markdown("Select SNP and CBARQ Question")
 
 # Choose SNP to view
